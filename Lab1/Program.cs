@@ -8,7 +8,6 @@ public class Program
 
         Zwierze[] zwierzeta = new Zwierze[3];
 
-        // Wczytywanie danych o 3 zwierzętach
         for (int i = 0; i < 3; i++)
         {
             Console.WriteLine($"Podaj dane dla zwierzęcia nr {i + 1}:");
@@ -30,54 +29,46 @@ public class Program
             Console.WriteLine();
         }
 
-        // Utworzenie klona (kopiowanie 2. zwierzęcia)
         Zwierze klon = new Zwierze(zwierzeta[1]);
-        klon.SetNazwa("Klon_" + klon.GetNazwa());
+        klon.Nazwa = "Klon_" + klon.Nazwa; 
 
         Console.WriteLine("\n=== Informacje o wszystkich zwierzętach ===");
         for (int i = 0; i < 3; i++)
         {
             Console.WriteLine($"\nZwierzę {i + 1}:");
-            Console.WriteLine($"Nazwa: {zwierzeta[i].GetNazwa()}");
+            Console.WriteLine($"Nazwa: {zwierzeta[i].Nazwa}");
             Console.WriteLine($"Gatunek: {zwierzeta[i].GetGatunek()}");
             Console.WriteLine($"Liczba nóg: {zwierzeta[i].GetLiczbaNog()}");
             zwierzeta[i].daj_glos();
         }
 
-        // Wyświetlenie informacji o klonie
         Console.WriteLine("\nZwierzę 4 (klon):");
-        Console.WriteLine($"Nazwa: {klon.GetNazwa()}");
+        Console.WriteLine($"Nazwa: {klon.Nazwa}");
         Console.WriteLine($"Gatunek: {klon.GetGatunek()}");
         Console.WriteLine($"Liczba nóg: {klon.GetLiczbaNog()}");
         klon.daj_glos();
 
-        // Wyświetlenie liczby zwierząt
         Console.WriteLine($"\nŁączna liczba utworzonych zwierząt: {Zwierze.PodajLiczbeZwierzat()}");
     }
 }
 
 public class Zwierze
 {
-    // Pola prywatne
     private string nazwa;
     private string gatunek;
     private int liczbaNog;
 
-    // Pole statyczne
     private static int liczbaZwierzat = 0;
 
-    // Gettery
-    public string GetNazwa() => nazwa;
+    public string Nazwa
+    {
+        get { return nazwa; }
+        set { nazwa = value; }
+    }
+
     public string GetGatunek() => gatunek;
     public int GetLiczbaNog() => liczbaNog;
 
-    // Setter dla nazwy
-    public void SetNazwa(string nowaNazwa)
-    {
-        nazwa = nowaNazwa;
-    }
-
-    // Konstruktor bezparametrowy
     public Zwierze()
     {
         nazwa = "Rex";
@@ -86,7 +77,6 @@ public class Zwierze
         liczbaZwierzat++;
     }
 
-    // Konstruktor z parametrami
     public Zwierze(string nazwa, string gatunek, int liczbaNog)
     {
         this.nazwa = nazwa;
@@ -95,7 +85,6 @@ public class Zwierze
         liczbaZwierzat++;
     }
 
-    // Konstruktor kopiujący
     public Zwierze(Zwierze inne)
     {
         this.nazwa = inne.nazwa;
@@ -104,7 +93,6 @@ public class Zwierze
         liczbaZwierzat++;
     }
 
-    // Metoda daj_glos()
     public void daj_glos()
     {
         switch (gatunek.ToLower())
@@ -124,7 +112,6 @@ public class Zwierze
         }
     }
 
-    // Metoda statyczna zwracająca liczbę zwierząt
     public static int PodajLiczbeZwierzat()
     {
         return liczbaZwierzat;
